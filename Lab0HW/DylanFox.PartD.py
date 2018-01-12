@@ -6,3 +6,5 @@ def main(n):
         return 1
     else:
         return n * main(n-1)
+
+print(main(10))

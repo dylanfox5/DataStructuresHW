@@ -3,7 +3,7 @@
 
 def main():
 
-    file = open("file.txt", "r")
+    file = open("DylanFox.PartB.py", "r")
     text = file.readlines()
     lineNumber = 1
 
