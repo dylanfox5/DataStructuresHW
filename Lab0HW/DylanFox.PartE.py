@@ -7,9 +7,9 @@ def main(n):
     for x in range(2,n):
         isPrime = True
         for y in range(2, x):
-            if x%y == 0 and x != y:
+            if x%y == 0:
                 isPrime = False
-        if isPrime == True:
+        if isPrime:
             print(x, "is prime")
         else:
             print(x, "is not prime")
