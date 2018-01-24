@@ -2,7 +2,7 @@
 
 import turtle
 import time
-
+print(turtle.screensize())
 ##dfox = Turtle()
 
 ##dfox.forward(100)
@@ -49,22 +49,26 @@ class RacingTurtle:
         self.turt.left(degrees)
         time.sleep(self.turnDelay)
 
+
+
 racerone = RacingTurtle(0, 0, "Racer One")
 eugene = RacingTurtle(15, 0.5, "Eugene 'The Machine' Topps")
 blaze = RacingTurtle(40, 1, "Blaze")
 zeus = RacingTurtle(0, -.15, "Zeus the Lightning Turtle")
 
-eugene.turt.penup()
-eugene.turt.sety(150)
-eugene.turt.pendown()
+racers = [eugene, racerone, blaze, zeus]
 
-blaze.turt.penup()
-blaze.turt.sety(-150)
-blaze.turt.pendown()
+##eugene.turt.penup()
+##eugene.turt.sety(150)
+##eugene.turt.pendown()
 
-zeus.turt.penup()
-zeus.turt.sety(-300)
-zeus.turt.pendown()
+##blaze.turt.penup()
+##blaze.turt.sety(-150)
+##blaze.turt.pendown()
+##
+##zeus.turt.penup()
+##zeus.turt.sety(-300)
+##zeus.turt.pendown()
 
 raceTest = [100, 90, 100, -90, 100]
 ovalRace = [100, -90, 100, -90, 200, -90, 100, -90, 100]
@@ -84,22 +88,6 @@ def runRace(rt, track):
                 rt.turnRight(distance)
 
         counter += 1
-    
-    #forward 27
-    #right 90
-    #forward 100
-    #left 90
-    #forward 100
-
-##    runForward(100, rt)
-##
-##    rt.turnRight(90)
-##
-##    runForward(100, rt)
-##
-##    rt.turnLeft(90)
-##
-##    runForward(100, rt)
 
     endTime = time.clock()
 
@@ -110,7 +98,21 @@ def runForward(dist, rt):
     for i in range(distance):
         rt.forward()
 
-print("Eugene:", runRace(eugene, ovalRace))
-print("RacerOne:", runRace(racerone, ovalRace))
-print("Blaze:", runRace(blaze, ovalRace))
-print("Zeus:", runRace(zeus, ovalRace))
+def reposRacers(racelist):
+
+    currentRacer = 0
+    startpos = (len(racers) * 250 - (len(racers)) * 125) * -1
+    
+    for racer in racelist:
+        racer.turt.penup()
+        racer.turt.setx(startpos + (125 * currentRacer) )
+        racer.turt.pendown()
+        currentRacer += 1
+    
+
+turtle.screensize(len(racers) * 250, 300)
+
+reposRacers(racers)
+
+for racer in racers:
+    print(racer.name, runRace(racer, ovalRace))
