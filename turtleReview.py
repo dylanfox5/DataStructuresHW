@@ -47,7 +47,7 @@ class RacingTurtle:
     def turnLeft(self, degrees):
 
         self.turt.left(degrees)
-        sleep(self.turnDelay)
+        time.sleep(self.turnDelay)
 
 racerone = RacingTurtle(0, 0, "Racer One")
 eugene = RacingTurtle(15, 0.5, "Eugene 'The Machine' Topps")
@@ -62,21 +62,44 @@ blaze.turt.penup()
 blaze.turt.sety(-150)
 blaze.turt.pendown()
 
+zeus.turt.penup()
+zeus.turt.sety(-300)
+zeus.turt.pendown()
 
-def runRace(rt):
+raceTest = [100, 90, 100, -90, 100]
+ovalRace = [100, -90, 100, -90, 200, -90, 100, -90, 100]
+
+
+def runRace(rt, track):
 
     time.clock()
     startTime = time.clock()
+    counter = 0
+
+    for distance in track:
+        if counter % 2 == 0:
+            runForward(distance, rt)
+
+        else:
+                rt.turnRight(distance)
+
+        counter += 1
     
     #forward 27
     #right 90
     #forward 100
+    #left 90
+    #forward 100
 
-    runForward(100, rt)
-
-    rt.turnRight(90)
-
-    runForward(100, rt)
+##    runForward(100, rt)
+##
+##    rt.turnRight(90)
+##
+##    runForward(100, rt)
+##
+##    rt.turnLeft(90)
+##
+##    runForward(100, rt)
 
     endTime = time.clock()
 
@@ -87,29 +110,7 @@ def runForward(dist, rt):
     for i in range(distance):
         rt.forward()
 
-
-
-##time.clock()
-##eugeneStartTime = time.clock()
-##
-###leg 1
-##while (eugene.getX() < 27):
-##       eugene.forward(1)
-##
-###turn
-##eugene.turnRight(90)
-##
-###leg 2
-##while (eugene.getY() > 50):
-##       eugene.forward(1)
-##
-##eugeneEndTime = time.clock()
-
-
-print(runRace(eugene))
-print(runRace(racerone))
-print(runRace(blaze))
-print(runRace(zeus))
-##print(eugeneEndTime - eugeneStartTime)
-##print(racerEndTime - racerStartTime)
-##print(blazeEndTime - blazeStartTime)
+print("Eugene:", runRace(eugene, ovalRace))
+print("RacerOne:", runRace(racerone, ovalRace))
+print("Blaze:", runRace(blaze, ovalRace))
+print("Zeus:", runRace(zeus, ovalRace))
