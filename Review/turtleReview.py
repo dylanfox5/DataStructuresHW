@@ -58,18 +58,6 @@ zeus = RacingTurtle(0, -.15, "Zeus the Lightning Turtle")
 
 racers = [eugene, racerone, blaze, zeus]
 
-##eugene.turt.penup()
-##eugene.turt.sety(150)
-##eugene.turt.pendown()
-
-##blaze.turt.penup()
-##blaze.turt.sety(-150)
-##blaze.turt.pendown()
-##
-##zeus.turt.penup()
-##zeus.turt.sety(-300)
-##zeus.turt.pendown()
-
 raceTest = [100, 90, 100, -90, 100]
 ovalRace = [100, -90, 100, -90, 200, -90, 100, -90, 100]
 
