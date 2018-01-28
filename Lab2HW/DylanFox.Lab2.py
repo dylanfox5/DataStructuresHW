@@ -9,16 +9,20 @@ class Physician:
 
         self.name = name #Physician 1-6
 
-#class Nurse:
+class Nurse:
+
+    def __init__(self, name):
+
+        self.name = name #nurse
 
 class Patient:
 
     def __init__(self, name, triaged, triageLevel, waitingRoom, ExamRoom, minutes):
 
         self.name = name
-        self.traiged = triaged #boolean: True=yes; False=no
+        self.triaged = triaged #boolean: True=yes; False=no
         self.triageLevel = triageLevel #scale of 1-10? based on urgency
-        self.waitingRoom = waitingRoom #
+        self.waitingRoom = waitingRoom #1 or 2; 1=1st waiting room, 2=2nd waiting room
         self.ExamRoom = ExamRoom #Examroom patient is currently in
         self.minutes = random.randint(15,20) #random num of mins 
 
@@ -31,6 +35,10 @@ class ExamRoom:
         self.isFull = isFull #boolean: true=yes; false=no
         self.Patient = Patient #current patient in examroom
 
+class WaitingRoomOne:
+
+class WaitingRoomTwo:
+
 
 physician1 = Physician("Physician 1")
 physician2 = Physician("Physician 2")
@@ -38,8 +46,8 @@ physician3 = Physician("Physician 3")
 physician4 = Physician("Physician 4")
 physicians = [physician1, physician2, physician3, physician4]
 
-patient1 = Patient("Paitent 1", False, 5, False, None, 0)
-patient2 = Patient("Patient 2", False, 9, False, None, 0)
+patient1 = Patient("Paitent 1", False, 5, 1, None, 0)
+patient2 = Patient("Patient 2", False, 9, 1, None, 0)
 patients = [patient1, patient2]
 
 exam1 = ExamRoom("ExamRoom 1", "", False, None)
@@ -55,9 +63,6 @@ def simulate():
             if examroom.physicianName is "":
                 examroom.physicianName = physician.name
                 break
-
-
-
             
     urgency = 0
     for x in range(len(patients)):
