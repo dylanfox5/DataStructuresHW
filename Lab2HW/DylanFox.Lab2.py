@@ -22,6 +22,7 @@ class Nurse:
 
         
     def sendPatient(): #send patient to waiting room for physician
+        pass
 
 class Patient:
 
