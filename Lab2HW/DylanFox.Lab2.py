@@ -3,6 +3,17 @@
 
 import random
 
+waitingRoom = []
+traigeRoom = []
+names = ["joey", "bobby", "susann", "loretta", "grant",\
+         "jenny", "billy", "tucker", "cletus", "hunter",\
+         "gunner", "rose", "amy", "charlette", "duke", \
+         "ricky", "bo", "luke", "jesse"]
+
+examRoom = []
+examRoomSize = 6
+doctors = 6
+
 class Physician:
 
     def __init__(self, name):
@@ -12,7 +23,12 @@ class Physician:
     def examination(): #sets random minutes 15-20
         minutes = random.randint(15,20)
 
-class Nurse:
+def callNurse():
+    #move patient from waiting room to triage room
+    triageRoom.append(waitingRoom.pop(0))
+    sort(triageRoom, key=patient.traigeNumber)
+
+class Nurse: #function
 
     def __init__(self, name):
 
@@ -26,9 +42,16 @@ class Nurse:
 
 class Patient:
 
-    def __init__(self):
+    def __init__(self, time):
+        self.triageNumber = random.randint(100)
+        self.name = names[random.randint(len(names)-1)]\
+                    + " " + names[random.randint(len(names)-1)]
+        self.arrivalTime = time
+        self.treatmentTime = random.randint(15, 20)
 
-        self.name = name
+        
+    def exit(self):
+        #remove patient from simulation
 
 class ExamRoom:
     
