@@ -1,10 +1,12 @@
+
 #Dylan Fox
 #Doctor's Office Simulation
 
 import random
+import time
 
 waitingRoom = []
-traigeRoom = []
+triageRoom = []
 names = ["joey", "bobby", "susann", "loretta", "grant",\
          "jenny", "billy", "tucker", "cletus", "hunter",\
          "gunner", "rose", "amy", "charlette", "duke", \
@@ -14,85 +16,56 @@ examRoom = []
 examRoomSize = 6
 doctors = 6
 
-class Physician:
-
-    def __init__(self, name):
-
-        self.name = name #Physician 1-6
-
-    def examination(): #sets random minutes 15-20
-        minutes = random.randint(15,20)
-
 def callNurse():
     #move patient from waiting room to triage room
     triageRoom.append(waitingRoom.pop(0))
-    sort(triageRoom, key=patient.traigeNumber)
-
-class Nurse: #function
-
-    def __init__(self, name):
-
-        self.name = name #nurse
-
-    def getPatient(): #get patient to triage
-
-        
-    def sendPatient(): #send patient to waiting room for physician
-        pass
+    sorted(triageRoom, key=patient.triageNumber)
 
 class Patient:
 
     def __init__(self, time):
-        self.triageNumber = random.randint(100)
-        self.name = names[random.randint(len(names)-1)]\
-                    + " " + names[random.randint(len(names)-1)]
+        
+        self.triageNumber = random.randint(1,100)
+        self.name = names[random.randint(0,len(names)-1)]\
+                    + " " + names[random.randint(0,len(names)-1)]
         self.arrivalTime = time
         self.treatmentTime = random.randint(15, 20)
-
+        self.timeInExamRoom = 0
         
     def exit(self):
+        pass
         #remove patient from simulation
 
-class ExamRoom:
-    
-    def __init__(self, Physician):
+def simulate():
 
-        self.Physician = Physician #which physician is at each examroom
-        self.runTime = 0
-        self.Patient = None #current patient in examroom
+    simulationTime = time.clock()
+    for x in range(6):
+                waitingRoom.append(Patient(time.clock()))
 
-    def addPatient(self, WaitingRoom): #add patient to examroom
+    for x in range(len(waitingRoom)):
+        callNurse()
 
-        self.waitingList2.pop(0)
-        
-    def removePatient(self): #remove patient from examroom
+    for p in triageRoom:
+        print(p.name)
 
-        
-    def timeRemaining():
-        
-        return self.runTime
+##    while simulationTime < 600:
+##        print(simulationTime)
+##    
+##        if simulationTime % 60 == 0:
+##            for x in range(5):
+##                waitingRoom.append(Patient(time.clock()))
+##
+##        if len(examRoom) != examRoomSize:
+##            while len(examRoom) != examRoomSize:
+##                callNurse()
+##                nextPatient = triageRoom.pop(0)
+##                examRoom.append(nextPatient)
+##                nextPatient.timeInExamRoom = time.clock()
+##
+##        else:
+##            for p in examRoom:
+##               if p.timeInExamRoom >= p.treatmentTime:
+##                    p = patientTreated
+##                    examRoom.remove(patientTreated)
 
-
-    
-class WaitingRoom:
-
-    def __init__(self):
-
-        self.waitingList1 = []
-        self.waitingList2 = []
-
-    def addPatients(self, patient): #keep track of patients before nurse
-
-        self.waitingList1.append(patient)
-
-    def removePatients(self): #remove patiens waiting for nurse
-
-        return self.waitingList1.pop(0)
-        
-    def addPatientsTwo(self, patient): #add patients waiting for physician
-
-        self.waitingList2.append(patient)
-
-    def removePatientsTwo(self): #remove patients waiting for physician
-
-        return self.waitingList2.pop(0)
+simulate()
