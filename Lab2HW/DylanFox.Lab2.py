@@ -43,19 +43,22 @@ def simulate():
 
     time.clock()
 
+    patientsTreated = 0
     minute = 1
-    while minute != 10:
+    while minute != 11:
         print("Minute", minute)
-        for i in range(6):
-            waitingRoom.append(Patient(int(time.clock())))
+        
+        for i in range(6): #adds # of patients every loop through
+            waitingRoom.append(Patient(minute))
 
-        for i in range(len(waitingRoom)):
-                    callNurse()
+        for i in range(len(waitingRoom)): #moves to triageRoom + triages patients
+            callNurse()
+            
 
-        if len(examRoom) < examRoomSize:
+        if len(examRoom) < examRoomSize: #check any examRoom opening
             for i in range(len(examRoom), examRoomSize):
                 nextPatient = triageRoom.pop(0)
-                examRoom.append(nextPatient)
+                examRoom.append(nextPatient) #adds patient to examRoom
                 nextPatient.timeEnteredExamRoom = minute
 
         print("Patients in Exam Room:")
@@ -70,13 +73,15 @@ def simulate():
         for p in waitingRoom:
               print(p.name)
 
-        for p in examRoom:
-            if (minute - p.timeEnteredExamRoom) >= p.treatmentTime:
-                examRoom.remove(p)
+        for p in examRoom: #checks if treatmentTime has expired
+            if (minute - p.timeEnteredExamRoom) >= p.treatmentTime-1:
+                examRoom.remove(p) #removes patient from examRoom
+                patientsTreated += 1
                 
+        print("Patients Treated:", patientsTreated)
         print("\n")
         #time.sleep(10)
-        
+
         minute += 1
 
 
