@@ -1,4 +1,3 @@
-
 #Dylan Fox
 #Doctor's Office Simulation
 
@@ -14,12 +13,10 @@ names = ["joey", "bobby", "susann", "loretta", "grant",\
 
 examRoom = []
 examRoomSize = 6
-doctors = 6
 
 def callNurse():
-    #move patient from waiting room to triage room
-    triageRoom.append(waitingRoom.pop(0))
-    sorted(triageRoom, key=patient.triageNumber)
+    triageRoom.append(waitingRoom.pop(0)) #move patient from waiting room to triage room
+    triageRoom.sort(key=lambda Patient: Patient.triageNumber) #sorts based on triageNumber
 
 class Patient:
 
@@ -29,43 +26,58 @@ class Patient:
         self.name = names[random.randint(0,len(names)-1)]\
                     + " " + names[random.randint(0,len(names)-1)]
         self.arrivalTime = time
-        self.treatmentTime = random.randint(15, 20)
-        self.timeInExamRoom = 0
+        self.treatmentTime = random.randint(1, 5)
+        self.timeEnteredExamRoom = 0
         
-    def exit(self):
-        pass
-        #remove patient from simulation
+    def exit(self, patient): #remove patient from simulation
+        examRoom.remove(patient)
 
 def simulate():
 
-    simulationTime = time.clock()
-    for x in range(6):
-                waitingRoom.append(Patient(time.clock()))
+    """Simulation adds 6 patients every minute,
+        one minute is equal to one loop through the while statement,
+        patients are added to the waitingRoom, then sorted based on
+        triageNumber in the triageRoom, based on any open examRooms
+        the patients from the triageRoom are added to an examRoom,
+        once patient's treatmentTime has expired they are removed."""
 
-    for x in range(len(waitingRoom)):
-        callNurse()
+    time.clock()
 
-    for p in triageRoom:
-        print(p.name)
+    minute = 1
+    while minute != 10:
+        print("Minute", minute)
+        for i in range(6):
+            waitingRoom.append(Patient(int(time.clock())))
 
-##    while simulationTime < 600:
-##        print(simulationTime)
-##    
-##        if simulationTime % 60 == 0:
-##            for x in range(5):
-##                waitingRoom.append(Patient(time.clock()))
-##
-##        if len(examRoom) != examRoomSize:
-##            while len(examRoom) != examRoomSize:
-##                callNurse()
-##                nextPatient = triageRoom.pop(0)
-##                examRoom.append(nextPatient)
-##                nextPatient.timeInExamRoom = time.clock()
-##
-##        else:
-##            for p in examRoom:
-##               if p.timeInExamRoom >= p.treatmentTime:
-##                    p = patientTreated
-##                    examRoom.remove(patientTreated)
+        for i in range(len(waitingRoom)):
+                    callNurse()
+
+        if len(examRoom) < examRoomSize:
+            for i in range(len(examRoom), examRoomSize):
+                nextPatient = triageRoom.pop(0)
+                examRoom.append(nextPatient)
+                nextPatient.timeEnteredExamRoom = minute
+
+        print("Patients in Exam Room:")
+        for p in examRoom:
+            print(p.name, "Treatment Time:", p.treatmentTime, p.timeEnteredExamRoom)
+
+        print("\nPatients in Triage Room:")
+        for p in triageRoom:
+            print(p.name, "Triage Number:", p.triageNumber)
+
+        print("\nPatients in Waiting Room:")
+        for p in waitingRoom:
+              print(p.name)
+
+        for p in examRoom:
+            if (minute - p.timeEnteredExamRoom) >= p.treatmentTime:
+                examRoom.remove(p)
+                
+        print("\n")
+        #time.sleep(10)
+        
+        minute += 1
+
 
 simulate()
