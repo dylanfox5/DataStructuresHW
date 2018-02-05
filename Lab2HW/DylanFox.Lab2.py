@@ -6,6 +6,7 @@ import time
 
 waitingRoom = []
 triageRoom = []
+triageRoomSize = 15
 names = ["joey", "bobby", "susann", "loretta", "grant",\
          "jenny", "billy", "tucker", "cletus", "hunter",\
          "gunner", "rose", "amy", "charlette", "duke", \
@@ -26,7 +27,7 @@ class Patient:
         self.name = names[random.randint(0,len(names)-1)]\
                     + " " + names[random.randint(0,len(names)-1)]
         self.arrivalTime = time
-        self.treatmentTime = random.randint(1, 5)
+        self.treatmentTime = random.randint(15, 20) 
         self.timeEnteredExamRoom = 0
         
     def exit(self, patient): #remove patient from simulation
@@ -44,22 +45,27 @@ def simulate():
     time.clock()
 
     patientsTreated = 0
-    minute = 1
-    while minute != 11:
-        print("Minute", minute)
+    minute = 0 #used to simulate real minutes without having to wait
+    while minute != 20: #number of minutes to simulate
+        print("Minute", minute+1)
         
-        for i in range(6): #adds # of patients every loop through
-            waitingRoom.append(Patient(minute))
+        if minute % 2 == 0: #adds 6 patients every 2 minutes
+            for i in range(6): 
+                waitingRoom.append(Patient(minute+1))
 
-        for i in range(len(waitingRoom)): #moves to triageRoom + triages patients
-            callNurse()
+        if len(triageRoom) < triageRoomSize: #max of 15 patients in triageRoom
+            if len(waitingRoom) < triageRoomSize:
+                for i in range(len(triageRoom), len(waitingRoom)): #moves to triageRoom + triages patients
+                    callNurse()
+            elif len(waitingRoom) > triageRoomSize:
+                for i in range(len(triageRoom), triageRoomSize): #moves to triageRoom + triages patients
+                    callNurse()
             
-
         if len(examRoom) < examRoomSize: #check any examRoom opening
             for i in range(len(examRoom), examRoomSize):
                 nextPatient = triageRoom.pop(0)
                 examRoom.append(nextPatient) #adds patient to examRoom
-                nextPatient.timeEnteredExamRoom = minute
+                nextPatient.timeEnteredExamRoom = minute+1
 
         print("Patients in Exam Room:")
         for p in examRoom:
@@ -80,9 +86,8 @@ def simulate():
                 
         print("Patients Treated:", patientsTreated)
         print("\n")
-        #time.sleep(10)
+        time.sleep(3) #used to speed up simulation (not wait an actual minute)
 
         minute += 1
-
 
 simulate()
