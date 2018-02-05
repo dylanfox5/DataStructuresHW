@@ -27,7 +27,7 @@ class Patient:
         self.name = names[random.randint(0,len(names)-1)]\
                     + " " + names[random.randint(0,len(names)-1)]
         self.arrivalTime = time
-        self.treatmentTime = random.randint(15, 20) 
+        self.treatmentTime = random.randint(1, 5) 
         self.timeEnteredExamRoom = 0
         
     def exit(self, patient): #remove patient from simulation
@@ -41,8 +41,6 @@ def simulate():
         triageNumber in the triageRoom, based on any open examRooms
         the patients from the triageRoom are added to an examRoom,
         once patient's treatmentTime has expired they are removed."""
-
-    time.clock()
 
     patientsTreated = 0
     minute = 0 #used to simulate real minutes without having to wait
@@ -60,6 +58,7 @@ def simulate():
             elif len(waitingRoom) > triageRoomSize:
                 for i in range(len(triageRoom), triageRoomSize): #moves to triageRoom + triages patients
                     callNurse()
+
             
         if len(examRoom) < examRoomSize: #check any examRoom opening
             for i in range(len(examRoom), examRoomSize):
@@ -69,7 +68,7 @@ def simulate():
 
         print("Patients in Exam Room:")
         for p in examRoom:
-            print(p.name, "Treatment Time:", p.treatmentTime, p.timeEnteredExamRoom)
+            print(p.name, "Treatment Time:", p.treatmentTime,"Time entered Exam Room:", p.timeEnteredExamRoom)
 
         print("\nPatients in Triage Room:")
         for p in triageRoom:
@@ -86,7 +85,7 @@ def simulate():
                 
         print("Patients Treated:", patientsTreated)
         print("\n")
-        time.sleep(3) #used to speed up simulation (not wait an actual minute)
+        #time.sleep(3) #not actually needed
 
         minute += 1
 
