@@ -1,5 +1,5 @@
 #Dylan Fox
-#Collatz Conjecture
+#Lab 4: Part A - Collatz Conjecture
 
 def calculate(integer, x):
 
