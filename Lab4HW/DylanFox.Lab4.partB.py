@@ -8,38 +8,34 @@ def fibRecursive(integer):
     if integer == 1 or integer == 0:
         return 1
     else:
-        #print(integer, integer-1, integer-2)
         return fibRecursive(integer-1) + fibRecursive(integer-2)
 
 def fib(integer):
-
-    if integer <= 1:
-        return 1
-    else:
-        num = 2
-        numPrev = 1
-        for x in range(2,integer):
-            temp = num
-            num += numPrev
-            numPrev = temp
-    return num
-
-def main():
-    n = eval(input("Enter a number:"))
-
-    print("Recursive:",fibRecursive(n))
-    print("Iterative:",fib(n))
+    prevNum = 1
+    num = 1
+    counter = 0
+    for i in range(integer):
+        counter = prevNum+num
+        prevNum = num
+        num = counter
+    return prevNum
 
 def compare():
-    time.clock()
-    print("Calculating Fibonacci Sequence with Recursion:")
-    print(fibRecursive(30))
-    print(fibRecursive(40))
-    stopTime = time.clock()
-    print("It took", int(stopTime),"seconds to run it recursively")
-    print("Calculating Fibonacci Sequence Interatively:")
-    time.clock()
-    print(fib(30))
-    print(fib(40))
-    stopTime1 = time.clock()
-    print("It took", stopTime1,"seconds to run it interatively")
+
+    for i in range(30, 100, 10):
+        startTimeR = time.clock()
+        fibRecursive(i)
+        stopTimeR = time.clock()
+        startTimeL = time.clock()
+        fib(i)
+        stopTimeL = time.clock()
+
+        secondsR = stopTimeR - startTimeR
+        secondsL = stopTimeL - startTimeL
+        
+        print(i, secondsR, secondsL)
+
+        if secondsR < secondsL:
+            print("Recursive function was faster for", i,"th fibonacci number")
+        else:
+            print("Linear function was faster for", i,"th fibonacci number")
