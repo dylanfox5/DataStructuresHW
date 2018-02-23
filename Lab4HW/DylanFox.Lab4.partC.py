@@ -22,6 +22,7 @@ def main():
         startTime = time.clock()
         fibonacci(i)
         stopTime = time.clock()
-        print("It tooks", stopTime - startTime,"seconds to run dynamically.")
+        print("It took", stopTime - startTime,"seconds to run dynamically.")
 
 
+main()
