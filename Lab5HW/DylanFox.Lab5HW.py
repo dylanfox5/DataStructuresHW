@@ -13,23 +13,25 @@ def linearSearch(word):
         else:
             index += 1
 
-print(linearSearch("abbot"))
+def binaryRecursive(low, high, word):
 
-def binaryRecursive(word, x):
+    middle = int((low + high)/2)
 
-    index = 0
-    middle = int((len(wordlist.words) - 1)/2)
-    item = wordlist.words[middle]
+    if word == wordlist.words[middle]:
+        return middle
+    elif low == high:
+        if wordlist.words[low] == word:
+            return low
+        else:
+            return None
+    else:
+        if word < wordlist.words[middle]:
+            return binaryRecursive(low, middle-1, word)
+        elif word > wordlist.words[middle]:
+            return binaryRecursive(middle+1, high, word)
 
-    if item == word:
-        return index
 
-    elif item>word:
-        index += 1
-        return binaryRecursive([0, middle], index)
     
-    elif item<word:
-        index += 1
-        return binaryRecursive([middle], index)
-    
-print(binaryRecursive("abbot", 0))
+print(linearSearch("zygote"))    
+print(binaryRecursive(0, len(wordlist.words), "python"))
+print(binaryRecursive(0, len(wordlist.words), "rut"))
