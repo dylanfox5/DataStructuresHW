@@ -2,6 +2,7 @@
 #Dictionary Search
 
 import wordlist
+import time
 
 def linearSearch(word):
 
@@ -30,8 +31,14 @@ def binaryRecursive(low, high, word):
         elif word > wordlist.words[middle]:
             return binaryRecursive(middle+1, high, word)
 
+def calcTime():
+    start = time.clock()
+    print(linearSearch("python"))
+    stop = time.clock()
+    print("It took", stop - start, "seconds to run linearly.")
+    start = time.clock()
+    print(binaryRecursive(0, len(wordlist.words), "python"))
+    stop = time.clock()
+    print("It took", stop - start, "seconds to run recursively.")
 
-    
-print(linearSearch("zygote"))    
-print(binaryRecursive(0, len(wordlist.words), "python"))
-print(binaryRecursive(0, len(wordlist.words), "rut"))
+calcTime()
