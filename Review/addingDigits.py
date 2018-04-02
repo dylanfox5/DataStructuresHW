@@ -1,15 +1,11 @@
 #Review
 
 
-def addDigits(num, count):
+def addDigits(num):
 
-    x = count
-
-    if num < 10:
-        x += num
-        return x
+    if num == 0:
+        return 0
     else:
-        x += num%10
-        return addDigits(int(num/10), x)
+        return (num%10) + addDigits(num//10)
 
-print(addDigits(456, 0))
+print(addDigits(456))
