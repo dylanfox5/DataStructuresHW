@@ -36,10 +36,9 @@ class Queue:
         if self.length == 0:
             return
         else:
-            first = self.head 
-            self.head = first.next
+            #first = self.head 
+            self.head = self.head.next
             self.length -= 1
-    
 
     def __str__(self):
         
@@ -51,12 +50,37 @@ class Queue:
         return ans       
 
 class Stack:
-    
 
+    def __init__(self):
+        self.length = 0
+        self.top = None
 
+    def add(self, value):
 
+        item = ListItem(value, self.length)
+        
+        item.prev = self.top
+        self.top = item
+        self.length += 1
 
-newlist = Queue()
+    def remove(self):
+
+        if self.length == 0:
+            return
+        else:
+            self.top = self.top.prev
+            self.length -= 1
+
+    def __str__(self):
+        
+        ans = str(self.top.value)
+        current = self.top
+        for entry in range(self.length - 1):
+            current = current.prev
+            ans += ", " + str(current.value)
+        return ans      
+
+newlist = Stack()
 newlist.add(7)
 newlist.add(3)
 newlist.add(14)
@@ -66,5 +90,7 @@ newlist.add(0)
 newlist.add(0)
 newlist.add(56)
 print(newlist)
+print(newlist.length)
 newlist.remove()
 print(newlist)
+print(newlist.length)
