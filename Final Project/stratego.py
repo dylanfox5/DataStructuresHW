@@ -16,15 +16,14 @@ redUnits = pygame.sprite.Group()
 
 
 
-
+#Super Class
 class Unit(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
 
         pygame.sprite.Sprite.__init__(self)
 
-
-        self.image = pygame.image.load("Units/BlueUnits/blueRank6.jpg")
+        self.image = pygame.image.load("blueCover.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -35,11 +34,15 @@ class Unit(pygame.sprite.Sprite):
 
     
     def update(self):
-        pos = pygame.mouse.get_pos()
-        x = pos[0]
-        y = pos[1]
-        self.rect.x = x
-        self.rect.y = y
+        if self.selected == True:
+            pos = pygame.mouse.get_pos()
+            x = pos[0]
+            y = pos[1]
+            self.rect.x = x
+            self.rect.y = y
+            self.selected = False
+        else:
+            return
 
     def selectUnit(self):
         mx, my = pygame.mouse.get_pos()
@@ -48,33 +51,94 @@ class Unit(pygame.sprite.Sprite):
         print(x, y, mx, my)
         
         if x <= mx <= x + 40 and y <= mx < y + 40:
-            self.selected = True
+            self.selected = True  
         else:
             self.selected = False
 
 
-blue6 = Unit(150, 150)
+#Sub Classes
+
+class Rank2(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 2
+        self.team = team
+
+
+class Rank3(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 3
+        self.team = team
+
+class Rank4(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 4
+        self.team = team
+
+class Rank5(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 5
+        self.team = team
+
+class Rank6(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 6
+        self.team = team
+        self.image = pygame.image.load("Units/BlueUnits/blueRank6.jpg")
+        
+
+class Rank7(Unit):
+
+    def __init__(self, x, y, team):
+
+        Unit.__init__(self, x, y)
+        self.rank = 7
+        self.team = team
+
+
+
+
+
+
+blue6 = Rank6(200, 200, "blue")
 allUnits.add(blue6)
 blueUnits.add(blue6)
 
-allsprites = pygame.sprite.RenderPlain((blue6))
+
+
+#allsprites = pygame.sprite.RenderPlain((blue6))
 
 running = True
 while running:
 
     screen.blit(logo, (0,0))
     screen.blit(board, (150, 150))
-    allsprites.draw(screen)
+    allUnits.draw(screen)
     pygame.display.flip()
 
-    
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-##            mx, my = pygame.mouse.get_pos()
-##            blue6.rect.x = mx - 20
-##            blue6.rect.y = my - 20
-            blue6.selectUnit()
-            print(blue6.selected)
+        for unit in allUnits:
+    
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                unit.update()
+                if unit.selected == False:
+                    unit.selectUnit()
+                
+                print(unit.selected)
