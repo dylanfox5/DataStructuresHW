@@ -16,6 +16,7 @@ redUnits = pygame.sprite.Group()
 
 
 
+
 #Super Class
 class Unit(pygame.sprite.Sprite):
 
@@ -35,14 +36,11 @@ class Unit(pygame.sprite.Sprite):
     
     def update(self):
         if self.selected == True:
-            pos = pygame.mouse.get_pos()
-            x = pos[0]
-            y = pos[1]
-            self.rect.x = x
-            self.rect.y = y
+            mx, my = pygame.mouse.get_pos()
+            self.rect.x = mx - 20
+            self.rect.y = my - 20
             self.selected = False
         else:
-            return
 
     def selectUnit(self):
         mx, my = pygame.mouse.get_pos()
@@ -50,10 +48,11 @@ class Unit(pygame.sprite.Sprite):
         y = self.rect.y
         print(x, y, mx, my)
         
-        if x <= mx <= x + 40 and y <= mx < y + 40:
-            self.selected = True  
-        else:
-            self.selected = False
+        if x <= mx <= x + 40 and y <= my < y + 40:
+            self.selected = True
+        
+##        else:
+##            self.selected = False
 
 
 #Sub Classes
