@@ -1,19 +1,19 @@
 import pygame
 
-background_colour = (0, 0, 128)
+#Define screen size, grid size
 (width, height) = (500, 500)
 squareWidth = 50
 squareHeight = 50
 grid = []
 
-
+#Load images/colors onto screen
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Stratego")
 board = pygame.image.load("Images/strategoBoard.jpg")
-#logo = pygame.image.load("Images/strategoLogo.png")
-screen.fill(background_colour)
+logo = pygame.image.load("Images/strategoLogo.png")
 screen.convert()
 
+#Initialize sprite groups
 allUnits = pygame.sprite.Group()
 blueUnits = pygame.sprite.Group()
 redUnits = pygame.sprite.Group()
@@ -34,8 +34,10 @@ class Unit(pygame.sprite.Sprite):
         self.selected = False
 
     def getPos(self):
-        return self.rect.x, self.rect.y
-
+        mx, my = self.rect.x, self.rect.y
+        row = mx // (squareWidth)
+        col = my // (squareHeight)
+        return row, col
     
     def update(self):
         if self.selected == True:
@@ -44,9 +46,35 @@ class Unit(pygame.sprite.Sprite):
             row = mx // (squareWidth)
             col = my // (squareHeight)
 
-            self.rect.x = (row * squareWidth) + 3
-            self.rect.y = (col * squareHeight) + 3
-
+            if row == 2 and col == 4:
+                print("Can't move there!")
+                return
+            elif row == 2 and col == 5:
+                print("Can't move there!")
+                return
+            elif row == 3 and col == 4:
+                print("Can't move there!")
+                return
+            elif row == 3 and col == 5:
+                print("Can't move there!")
+                return
+            elif row == 6 and col == 4:
+                print("Can't move there!")
+                return
+            elif row == 6 and col == 5:
+                print("Can't move there!")
+                return
+            elif row == 7 and col == 4:
+                print("Can't move there!")
+                return
+            elif row == 7 and col == 5:
+                print("Can't move there!")
+                return
+            else:
+                self.rect.x = (row * squareWidth) + 3
+                self.rect.y = (col * squareHeight) + 3
+                grid[row][col] = 1
+                print(grid)
         else:
             return
 
@@ -64,7 +92,6 @@ class Unit(pygame.sprite.Sprite):
 
 
 #Sub Classes
-
 class Rank2(Unit):
 
     def __init__(self, x, y, team):
@@ -328,7 +355,10 @@ def setupUnits():
     redUnits.add(red10)
 
 
-    
+def updateGrid():
+    for unit in allUnits:
+        row, col = unit.getPos()
+        grid[row][col] = 1
 
 
 #Create the grid -- 0 means no Unit occupies, 1 means one Unit occupies
@@ -338,34 +368,61 @@ for row in range(10):
         grid[row].append(0)
 print(grid)
 
-
-
+#Main Functions
 setupUnits()
-
-
-running = True
-while running:
-
-    #screen.blit(logo, (0,0))
-    screen.blit(board, (0, 0))
-    allUnits.draw(screen)
+def intro():
+    pygame.init()
+    gameloop = True
+    screen.fill((255, 255, 255))
+    screen.blit(logo, (0,0))
     pygame.display.flip()
-
-    for event in pygame.event.get():
-        for unit in allUnits:
     
+    while gameloop:
+
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                gameloop = False
                 pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                row = pos[0] // (squareWidth)
-                column = pos[1] // (squareHeight)
-                #print("row, col:", row, column)                
-                
-                
-                unit.update()
-                if unit.selected == False:
-                    unit.selectUnit()
-                
-                #print(unit.selected)
+                screen.fill((0, 0, 0))
+                pygame.display.flip()
+                return
+    
+def gameloop():
+    running = True
+    while running:
+
+        screen.blit(board, (0, 0))
+        allUnits.draw(screen)
+        pygame.display.flip()
+        updateGrid()
+
+        for event in pygame.event.get():
+            for unit in allUnits:
+
+                    
+                if event.type == pygame.QUIT:
+                    running = False
+                    pygame.quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    row = pos[0] // (squareWidth)
+                    column = pos[1] // (squareHeight)
+                    print("row, col:", row, column)
+
+
+                    
+               
+                    unit.update()
+                    if unit.selected == False:
+                        unit.selectUnit()
+                    
+                    #print(unit.selected)
+
+    print(grid)
+
+def main():
+    pass
+
+intro()
+gameloop()
