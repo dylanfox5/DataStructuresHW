@@ -2,11 +2,11 @@ import pygame
 
 
 
-#Define screen size, grid size
-(width, height) = (500, 500)
+#Define grid size
 squareWidth = 50
 squareHeight = 50
 grid = []
+playerMoved = False
 
 #Create grid
 for row in range(10):
@@ -44,40 +44,44 @@ class Unit(pygame.sprite.Sprite):
             col = self.rect.y // (squareHeight)
 
             if newRow == 2 and newCol == 4:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 2 and newCol == 5:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 3 and newCol == 4:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 3 and newCol == 5:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 6 and newCol == 4:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 6 and newCol == 5:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 7 and newCol == 4:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
             elif newRow == 7 and newCol == 5:
-                print("Can't move there!")
+                print("Can't move there, man!")
                 self.selected = False
                 return
-##            elif grid[newRow][newCol] == 1:
-##                print("Can't move there!")
-##                self.selected = False
+            elif grid[newRow][newCol] == 1:
+                print("Can't move there!")
+                self.selected = False
+            elif self.rank == 1 or self.rank == 0:
+                print("Can't move this unit, man!")
+                self.selected = False
+                return
             elif self.team == "blue" and (newRow - row > 1 or newCol - col > 1) and self.rank != 2:
                 print("Can only move one space!")
             elif self.team == "red" and (row - newRow > 1 or col - newCol > 1) and self.rank != 2:
@@ -113,8 +117,10 @@ class Rank2(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank2.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank2.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank2.jpg")
+            self.baseImage = "Units/RedUnits/redRank2.jpg"
 
 class Rank3(Unit):
 
@@ -126,8 +132,10 @@ class Rank3(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank3.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank3.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank3.jpg")
+            self.baseImage = "Units/RedUnits/redRank3.jpg"
 
 class Rank4(Unit):
 
@@ -139,8 +147,10 @@ class Rank4(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank4.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank4.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank4.jpg")
+            self.baseImage = "Units/RedUnits/redRank4.jpg"
 
 class Rank5(Unit):
 
@@ -152,8 +162,10 @@ class Rank5(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank5.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank5.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank5.jpg")
+            self.baseImage = "Units/RedUnits/redRank5.jpg"
 
 class Rank6(Unit):
 
@@ -165,8 +177,10 @@ class Rank6(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank6.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank6.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank6.jpg")
+            self.baseImage = "Units/RedUnits/redRank6.jpg"
         
 
 class Rank7(Unit):
@@ -179,8 +193,10 @@ class Rank7(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank7.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank7.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank7.jpg")
+            self.baseImage = "Units/RedUnits/redRank7.jpg"
 
 class Rank8(Unit):
     
@@ -192,8 +208,10 @@ class Rank8(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank8.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank8.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank8.jpg")
+            self.baseImage = "Units/RedUnits/redRank8.jpg"
 
 class Rank9(Unit):
 
@@ -205,8 +223,10 @@ class Rank9(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank9.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank9.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank9.jpg")
+            self.baseImage = "Units/RedUnits/redRank9.jpg"
 
 class Rank10(Unit):
     
@@ -218,8 +238,10 @@ class Rank10(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRank10.jpg")
+            self.baseImage = "Units/BlueUnits/blueRank10.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRank10.jpg")
+            self.baseImage = "Units/RedUnits/redRank10.jpg"
 
 class RankBomb(Unit):
     
@@ -231,8 +253,10 @@ class RankBomb(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRankBomb.jpg")
+            self.baseImage = "Units/BlueUnits/blueRankBomb.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRankBomb.jpg")
+            self.baseImage = "Units/RedUnits/redRankBomb.jpg"
 
 
 class RankSpy(Unit):
@@ -245,8 +269,10 @@ class RankSpy(Unit):
         
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRankSpy.jpg")
+            self.baseImage = "Units/BlueUnits/blueRankSpy.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRankSpy.jpg")
+            self.baseImage = "Units/RedUnits/redRankSpy.jpg"
 
 class RankFlag(Unit):
     
@@ -258,5 +284,7 @@ class RankFlag(Unit):
 
         if self.team == "blue":
             self.image = pygame.image.load("Units/BlueUnits/blueRankFlag.jpg")
+            self.baseImage = "Units/BlueUnits/blueRankFlag.jpg"
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRankFlag.jpg")
+            self.baseImage = "Units/RedUnits/redRankFlag.jpg"

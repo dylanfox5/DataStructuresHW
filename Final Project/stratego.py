@@ -1,21 +1,23 @@
 import pygame
 import ranks
 
-#Define screen size, grid size
-(width, height) = (500, 500)
-##squareWidth = 50
-##squareHeight = 50
-##grid = []
+pygame.init()
 
+
+#Define screen size
+(width, height) = (500, 500)
+myFont = pygame.font.SysFont("Times New Roman", 100)
+startLabel = myFont.render("Start", 1, (255, 255, 255))
 
 #Load images/colors onto screen
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Stratego")
 board = pygame.image.load("Images/strategoBoard.jpg")
 logo = pygame.image.load("Images/strategoLogo.png")
+blueCover = pygame.image.load("Images/blueCover.png")
+redCover = pygame.image.load("Images/redCover.png")
 introScreen = pygame.display.set_mode((width, height))
 screen.convert()
-
 
 #Initialize sprite groups
 allUnits = pygame.sprite.Group()
@@ -34,43 +36,75 @@ def setupUnits():
     allUnits.add(blueSpy)
     blueUnits.add(blueSpy)
 
-    blueBomb = ranks.RankBomb(2, 0, "blue")
-    allUnits.add(blueBomb)
-    blueUnits.add(blueBomb)
+    blueBomb_0 = ranks.RankBomb(2, 0, "blue")
+    allUnits.add(blueBomb_0)
+    blueUnits.add(blueBomb_0)
 
-    blue2 = ranks.Rank2(3, 0, "blue")
-    allUnits.add(blue2)
-    blueUnits.add(blue2)
+    blueBomb_1 = ranks.RankBomb(2, 1, "blue")
+    allUnits.add(blueBomb_1)
+    blueUnits.add(blueBomb_1)
 
-    blue3 = ranks.Rank3(4, 0, "blue")
-    allUnits.add(blue3)
-    blueUnits.add(blue3)
+    blueBomb_2 = ranks.RankBomb(2, 2, "blue")
+    allUnits.add(blueBomb_2)
+    blueUnits.add(blueBomb_2)
 
-    blue4 = ranks.Rank4(5, 0, "blue")
-    allUnits.add(blue4)
-    blueUnits.add(blue4)
+    blue2_0 = ranks.Rank2(3, 0, "blue")
+    allUnits.add(blue2_0)
+    blueUnits.add(blue2_0)
 
-    blue5 = ranks.Rank5(6, 0, "blue")
-    allUnits.add(blue5)
-    blueUnits.add(blue5)
+    blue2_1 = ranks.Rank2(3, 1, "blue")
+    allUnits.add(blue2_1)
+    blueUnits.add(blue2_1)
 
-    blue6 = ranks.Rank6(7, 0, "blue")
-    allUnits.add(blue6)
-    blueUnits.add(blue6)
+    blue2_2 = ranks.Rank2(3, 2, "blue")
+    allUnits.add(blue2_2)
+    blueUnits.add(blue2_2)
+
+    blue3_0 = ranks.Rank3(4, 0, "blue")
+    allUnits.add(blue3_0)
+    blueUnits.add(blue3_0)
+
+    blue3_1 = ranks.Rank3(4, 1, "blue")
+    allUnits.add(blue3_1)
+    blueUnits.add(blue3_1)
+
+    blue4_0 = ranks.Rank4(5, 0, "blue")
+    allUnits.add(blue4_0)
+    blueUnits.add(blue4_0)
+
+    blue4_1 = ranks.Rank4(5, 1, "blue")
+    allUnits.add(blue4_1)
+    blueUnits.add(blue4_1)
+
+    blue5_0 = ranks.Rank5(6, 0, "blue")
+    allUnits.add(blue5_0)
+    blueUnits.add(blue5_0)
+
+    blue6_0 = ranks.Rank6(7, 0, "blue")
+    allUnits.add(blue6_0)
+    blueUnits.add(blue6_0)
+
+    blue6_1 = ranks.Rank6(7, 1, "blue")
+    allUnits.add(blue6_1)
+    blueUnits.add(blue6_1)
 
     blue7 = ranks.Rank7(8, 0, "blue")
     allUnits.add(blue7)
     blueUnits.add(blue7)
 
-    blue8 = ranks.Rank8(9, 0, "blue")
-    allUnits.add(blue8)
-    blueUnits.add(blue8)
+    blue8_0 = ranks.Rank8(9, 0, "blue")
+    allUnits.add(blue8_0)
+    blueUnits.add(blue8_0)
 
-    blue9 = ranks.Rank9(4, 1, "blue")
+    blue8_1 = ranks.Rank8(9, 1, "blue")
+    allUnits.add(blue8_1)
+    blueUnits.add(blue8_1)
+
+    blue9 = ranks.Rank9(0, 1, "blue")
     allUnits.add(blue9)
     blueUnits.add(blue9)
 
-    blue10 = ranks.Rank10(5, 1, "blue")
+    blue10 = ranks.Rank10(1, 1, "blue")
     allUnits.add(blue10)
     blueUnits.add(blue10)
 
@@ -84,43 +118,75 @@ def setupUnits():
     allUnits.add(redSpy)
     redUnits.add(redSpy)
 
-    redBomb = ranks.RankBomb(2, 9, "red")
-    allUnits.add(redBomb)
-    redUnits.add(redBomb)
+    redBomb_0 = ranks.RankBomb(2, 9, "red")
+    allUnits.add(redBomb_0)
+    redUnits.add(redBomb_0)
 
-    red2 = ranks.Rank2(3, 9, "red")
-    allUnits.add(red2)
-    redUnits.add(red2)
+    redBomb_1 = ranks.RankBomb(2, 8, "red")
+    allUnits.add(redBomb_1)
+    redUnits.add(redBomb_1)
 
-    red3 = ranks.Rank3(4, 9, "red")
-    allUnits.add(red3)
-    redUnits.add(red3)
+    redBomb_2 = ranks.RankBomb(2, 7, "red")
+    allUnits.add(redBomb_2)
+    redUnits.add(redBomb_2)
 
-    red4 = ranks.Rank4(5, 9, "red")
-    allUnits.add(red4)
-    redUnits.add(red4)
+    red2_0 = ranks.Rank2(3, 9, "red")
+    allUnits.add(red2_0)
+    redUnits.add(red2_0)
+
+    red2_1 = ranks.Rank2(3, 8, "red")
+    allUnits.add(red2_1)
+    redUnits.add(red2_1)
+
+    red2_2 = ranks.Rank2(3, 7, "red")
+    allUnits.add(red2_2)
+    redUnits.add(red2_2)
+
+    red3_0 = ranks.Rank3(4, 9, "red")
+    allUnits.add(red3_0)
+    redUnits.add(red3_0)
+
+    red3_1 = ranks.Rank3(4, 8, "red")
+    allUnits.add(red3_1)
+    redUnits.add(red3_1)
+
+    red4_0 = ranks.Rank4(5, 9, "red")
+    allUnits.add(red4_0)
+    redUnits.add(red4_0)
+
+    red4_1 = ranks.Rank4(5, 8, "red")
+    allUnits.add(red4_1)
+    redUnits.add(red4_1)
 
     red5 = ranks.Rank5(6, 9, "red")
     allUnits.add(red5)
     redUnits.add(red5)
 
-    red6 = ranks.Rank6(7, 9, "red")
-    allUnits.add(red6)
-    redUnits.add(red6)
+    red6_0 = ranks.Rank6(7, 9, "red")
+    allUnits.add(red6_0)
+    redUnits.add(red6_0)
+
+    red6_1 = ranks.Rank6(7, 8, "red")
+    allUnits.add(red6_1)
+    redUnits.add(red6_1)
 
     red7 = ranks.Rank7(8, 9, "red")
     allUnits.add(red7)
     redUnits.add(red7)
 
-    red8 = ranks.Rank8(9, 9, "red")
-    allUnits.add(red8)
-    redUnits.add(red8)
+    red8_0 = ranks.Rank8(9, 9, "red")
+    allUnits.add(red8_0)
+    redUnits.add(red8_0)
 
-    red9 = ranks.Rank9(4, 8, "red")
+    red8_1 = ranks.Rank8(9, 8, "red")
+    allUnits.add(red8_1)
+    redUnits.add(red8_1)
+
+    red9 = ranks.Rank9(0, 8, "red")
     allUnits.add(red9)
     redUnits.add(red9)
 
-    red10 = ranks.Rank10(5, 8, "red")
+    red10 = ranks.Rank10(1, 8, "red")
     allUnits.add(red10)
     redUnits.add(red10)
 
@@ -130,6 +196,7 @@ def printRow():
 
 #Main Functions
 setupUnits()
+#player1 = True
 
 for unit in allUnits:
     row, col = unit.getPos()
@@ -143,6 +210,7 @@ def intro():
     
     introScreen.fill((0, 0, 128))
     introScreen.blit(logo, (0,0))
+    introScreen.blit(startLabel, (150, 150))
     pygame.display.flip()
     
     while gameloop:
@@ -156,8 +224,20 @@ def intro():
                 return
     
 def gameloop():
+    player1 = True #blue team is player1
     running = True
     while running:
+        for unit in allUnits:
+            if player1 == True:
+                    if unit.team == "red":
+                        unit.image = redCover
+                    else:
+                        unit.image = pygame.image.load(unit.baseImage)
+            elif player1 == False:
+                    if unit.team == "blue":
+                        unit.image = blueCover
+                    else:
+                        unit.image = pygame.image.load(unit.baseImage)
 
         screen.blit(board, (0, 0))
         allUnits.draw(screen)
@@ -170,12 +250,16 @@ def gameloop():
                     running = False
                     pygame.quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
+
                     if unit.selected == True:
                         unit.update()
+                        if player1 == True:
+                            player1 = False
+                        else:
+                            player1 = True
                         printRow()
                     else:
                         unit.selectUnit()
-
                     print(unit.selected)
 
 
