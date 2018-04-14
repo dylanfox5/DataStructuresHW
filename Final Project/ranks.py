@@ -1,7 +1,5 @@
 import pygame
 
-
-
 #Define grid size
 squareWidth = 50
 squareHeight = 50
@@ -13,6 +11,11 @@ for row in range(10):
     grid.append([])
     for col in range(10):
         grid[row].append(0)
+
+#Initialize sprite groups
+allUnits = pygame.sprite.Group()
+blueUnits = pygame.sprite.Group()
+redUnits = pygame.sprite.Group()
 
 #Super Class
 class Unit(pygame.sprite.Sprite):
@@ -75,8 +78,11 @@ class Unit(pygame.sprite.Sprite):
                 print("Can't move there, man!")
                 self.selected = False
                 return
-            elif grid[newRow][newCol] == 1:
-                print("Can't move there!")
+            elif grid[newCol][newRow] == 1:
+                print("Attack!")
+                self.attack(newRow, newCol)
+                self.rect.x = (newRow * squareWidth) + 3
+                self.rect.y = (newCol * squareHeight) + 3
                 self.selected = False
             elif self.rank == 1 or self.rank == 0:
                 print("Can't move this unit, man!")
@@ -89,8 +95,8 @@ class Unit(pygame.sprite.Sprite):
             else:
                 self.rect.x = (newRow * squareWidth) + 3
                 self.rect.y = (newCol * squareHeight) + 3
-                grid[newRow][newCol] = 1
-                grid[row][col] = 0
+                grid[newCol][newRow] = 1
+                grid[col][row] = 0
                 self.selected = False
         else:
             return 
@@ -105,6 +111,44 @@ class Unit(pygame.sprite.Sprite):
             self.selected == True
         else:
             self.selected = False
+
+
+##    def move(self):
+##        self.rect.x = (newRow * squareWidth) + 3
+##        self.rect.y = (newCol * squareHeight) + 3
+##        grid[newRow][newCol] = 1
+##        grid[row][col] = 0
+
+    
+    def attack(self, newRow, newCol):
+        cRow, cCol = self.getPos()
+        for unit in allUnits:
+            row, col = unit.getPos()
+            if row == newRow and col == newCol:
+                if unit.rank > self.rank:
+                    allUnits.remove(self)
+
+                    unit.rect.x = (newRow * squareWidth) + 3
+                    unit.rect.y = (newCol * squareHeight) + 3
+                    
+                    grid[newCol][newRow] = 1
+                    grid[cCol][cRow] = 0
+                    
+                elif unit.rank < self.rank:
+                    allUnits.remove(unit)
+
+                    
+                    grid[newCol][newRow] = 1
+                    grid[cCol][cRow] = 0
+
+                elif unit.rank == self.rank:
+                    allUnits.remove(unit)
+                    allUnits.remove(self)
+                    
+                    grid[newCol][newRow] = 0
+                    grid[cCol][cRow] = 0
+
+                    
 
 #Sub Classes
 class Rank2(Unit):
