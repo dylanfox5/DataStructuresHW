@@ -19,11 +19,6 @@ redCover = pygame.image.load("Images/redCover.png")
 introScreen = pygame.display.set_mode((width, height))
 screen.convert()
 
-#Initialize sprite groups
-##allUnits = pygame.sprite.Group()
-##blueUnits = pygame.sprite.Group()
-##redUnits = pygame.sprite.Group()
-
 def setupUnits():
 
     #--Blue Units--#

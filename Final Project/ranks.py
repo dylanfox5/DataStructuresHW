@@ -39,6 +39,7 @@ class Unit(pygame.sprite.Sprite):
     def update(self):
         if self.selected == True:
             mx, my = pygame.mouse.get_pos()
+            otherUnit = None
 
             newRow = mx // (squareWidth)
             newCol = my // (squareHeight)
@@ -46,7 +47,24 @@ class Unit(pygame.sprite.Sprite):
             row = self.rect.x // (squareWidth)
             col = self.rect.y // (squareHeight)
 
-            if newRow == 2 and newCol == 4:
+            for unit in allUnits:
+                uRow, uCol = unit.getPos()
+                if uRow == newRow and uCol == newCol:
+                    otherUnit = unit
+
+
+
+            if otherUnit == None:
+                self.rect.x = (newRow * squareWidth) + 3
+                self.rect.y = (newCol * squareHeight) + 3
+                grid[newCol][newRow] = 1
+                grid[col][row] = 0
+                self.selected = False
+            elif otherUnit.team == self.team:
+                print("Pick somewhere else, man!")
+                self.selected = False
+                return
+            elif newRow == 2 and newCol == 4:
                 print("Can't move there, man!")
                 self.selected = False
                 return
@@ -78,12 +96,15 @@ class Unit(pygame.sprite.Sprite):
                 print("Can't move there, man!")
                 self.selected = False
                 return
-            elif grid[newCol][newRow] == 1:
+            elif grid[newCol][newRow] == 1 and otherUnit.team != self.team:
                 print("Attack!")
                 self.attack(newRow, newCol)
+
                 self.rect.x = (newRow * squareWidth) + 3
                 self.rect.y = (newCol * squareHeight) + 3
+                
                 self.selected = False
+                return
             elif self.rank == 1 or self.rank == 0:
                 print("Can't move this unit, man!")
                 self.selected = False
@@ -92,12 +113,6 @@ class Unit(pygame.sprite.Sprite):
                 print("Can only move one space!")
             elif self.team == "red" and (row - newRow > 1 or col - newCol > 1) and self.rank != 2:
                 print("Can only move one space!")
-            else:
-                self.rect.x = (newRow * squareWidth) + 3
-                self.rect.y = (newCol * squareHeight) + 3
-                grid[newCol][newRow] = 1
-                grid[col][row] = 0
-                self.selected = False
         else:
             return 
 
@@ -111,44 +126,35 @@ class Unit(pygame.sprite.Sprite):
             self.selected == True
         else:
             self.selected = False
-
-
-##    def move(self):
-##        self.rect.x = (newRow * squareWidth) + 3
-##        self.rect.y = (newCol * squareHeight) + 3
-##        grid[newRow][newCol] = 1
-##        grid[row][col] = 0
-
     
     def attack(self, newRow, newCol):
         cRow, cCol = self.getPos()
         for unit in allUnits:
             row, col = unit.getPos()
             if row == newRow and col == newCol:
-                if unit.rank > self.rank:
-                    allUnits.remove(self)
+                if unit.team == self.team:
+                    return
+                else:
+                    if unit.rank > self.rank:
+                        allUnits.remove(self)
+                        
+                        grid[newCol][newRow] = 1
+                        grid[cCol][cRow] = 0
+                            
+                    elif unit.rank < self.rank:
+                        allUnits.remove(unit)
+                        
+                        grid[newCol][newRow] = 1
+                        grid[cCol][cRow] = 0
 
-                    unit.rect.x = (newRow * squareWidth) + 3
-                    unit.rect.y = (newCol * squareHeight) + 3
-                    
-                    grid[newCol][newRow] = 1
-                    grid[cCol][cRow] = 0
-                    
-                elif unit.rank < self.rank:
-                    allUnits.remove(unit)
 
-                    
-                    grid[newCol][newRow] = 1
-                    grid[cCol][cRow] = 0
-
-                elif unit.rank == self.rank:
-                    allUnits.remove(unit)
-                    allUnits.remove(self)
-                    
-                    grid[newCol][newRow] = 0
-                    grid[cCol][cRow] = 0
-
-                    
+                    elif unit.rank == self.rank:
+                        allUnits.remove(unit)
+                        allUnits.remove(self)
+                        
+                        grid[newCol][newRow] = 0
+                        grid[cCol][cRow] = 0
+                        
 
 #Sub Classes
 class Rank2(Unit):
