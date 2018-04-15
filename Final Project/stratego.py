@@ -27,19 +27,19 @@ def setupUnits():
     ranks.allUnits.add(blueFlag)
     ranks.blueUnits.add(blueFlag)
 
-    blueSpy = ranks.RankSpy(1, 0, "blue")
+    blueSpy = ranks.RankSpy(6, 1, "blue")
     ranks.allUnits.add(blueSpy)
     ranks.blueUnits.add(blueSpy)
 
-    blueBomb_0 = ranks.RankBomb(2, 0, "blue")
+    blueBomb_0 = ranks.RankBomb(0, 1, "blue")
     ranks.allUnits.add(blueBomb_0)
     ranks.blueUnits.add(blueBomb_0)
 
-    blueBomb_1 = ranks.RankBomb(2, 1, "blue")
+    blueBomb_1 = ranks.RankBomb(1, 1, "blue")
     ranks.allUnits.add(blueBomb_1)
     ranks.blueUnits.add(blueBomb_1)
 
-    blueBomb_2 = ranks.RankBomb(2, 2, "blue")
+    blueBomb_2 = ranks.RankBomb(5, 1, "blue")
     ranks.allUnits.add(blueBomb_2)
     ranks.blueUnits.add(blueBomb_2)
 
@@ -47,47 +47,47 @@ def setupUnits():
     ranks.allUnits.add(blue2_0)
     ranks.blueUnits.add(blue2_0)
 
-    blue2_1 = ranks.Rank2(3, 1, "blue")
+    blue2_1 = ranks.Rank2(8, 0, "blue")
     ranks.allUnits.add(blue2_1)
     ranks.blueUnits.add(blue2_1)
 
-    blue2_2 = ranks.Rank2(3, 2, "blue")
+    blue2_2 = ranks.Rank2(9, 0, "blue")
     ranks.allUnits.add(blue2_2)
     ranks.blueUnits.add(blue2_2)
 
-    blue3_0 = ranks.Rank3(4, 0, "blue")
+    blue3_0 = ranks.Rank3(7, 0, "blue")
     ranks.allUnits.add(blue3_0)
     ranks.blueUnits.add(blue3_0)
 
-    blue3_1 = ranks.Rank3(4, 1, "blue")
+    blue3_1 = ranks.Rank3(3, 1, "blue")
     ranks.allUnits.add(blue3_1)
     ranks.blueUnits.add(blue3_1)
 
-    blue4_0 = ranks.Rank4(5, 0, "blue")
+    blue4_0 = ranks.Rank4(4, 0, "blue")
     ranks.allUnits.add(blue4_0)
     ranks.blueUnits.add(blue4_0)
 
-    blue4_1 = ranks.Rank4(5, 1, "blue")
+    blue4_1 = ranks.Rank4(7, 1, "blue")
     ranks.allUnits.add(blue4_1)
     ranks.blueUnits.add(blue4_1)
 
-    blue5_0 = ranks.Rank5(6, 0, "blue")
+    blue5_0 = ranks.Rank5(2, 0, "blue")
     ranks.allUnits.add(blue5_0)
     ranks.blueUnits.add(blue5_0)
 
-    blue6_0 = ranks.Rank6(7, 0, "blue")
+    blue6_0 = ranks.Rank6(1, 0, "blue")
     ranks.allUnits.add(blue6_0)
     ranks.blueUnits.add(blue6_0)
 
-    blue6_1 = ranks.Rank6(7, 1, "blue")
+    blue6_1 = ranks.Rank6(5, 0, "blue")
     ranks.allUnits.add(blue6_1)
     ranks.blueUnits.add(blue6_1)
 
-    blue7 = ranks.Rank7(8, 0, "blue")
+    blue7 = ranks.Rank7(6, 0, "blue")
     ranks.allUnits.add(blue7)
     ranks.blueUnits.add(blue7)
 
-    blue8_0 = ranks.Rank8(9, 0, "blue")
+    blue8_0 = ranks.Rank8(2, 1, "blue")
     ranks.allUnits.add(blue8_0)
     ranks.blueUnits.add(blue8_0)
 
@@ -95,11 +95,11 @@ def setupUnits():
     ranks.allUnits.add(blue8_1)
     ranks.blueUnits.add(blue8_1)
 
-    blue9 = ranks.Rank9(0, 1, "blue")
+    blue9 = ranks.Rank9(4, 1, "blue")
     ranks.allUnits.add(blue9)
     ranks.blueUnits.add(blue9)
 
-    blue10 = ranks.Rank10(1, 1, "blue")
+    blue10 = ranks.Rank10(8, 1, "blue")
     ranks.allUnits.add(blue10)
     ranks.blueUnits.add(blue10)
 
@@ -109,31 +109,31 @@ def setupUnits():
     ranks.allUnits.add(redFlag)
     ranks.redUnits.add(redFlag)
 
-    redSpy = ranks.RankSpy(1, 9, "red")
+    redSpy = ranks.RankSpy(9, 8, "red")
     ranks.allUnits.add(redSpy)
     ranks.redUnits.add(redSpy)
 
-    redBomb_0 = ranks.RankBomb(2, 9, "red")
+    redBomb_0 = ranks.RankBomb(0, 8, "red")
     ranks.allUnits.add(redBomb_0)
     ranks.redUnits.add(redBomb_0)
 
-    redBomb_1 = ranks.RankBomb(2, 8, "red")
+    redBomb_1 = ranks.RankBomb(1, 8, "red")
     ranks.allUnits.add(redBomb_1)
     ranks.redUnits.add(redBomb_1)
 
-    redBomb_2 = ranks.RankBomb(2, 7, "red")
+    redBomb_2 = ranks.RankBomb(5, 8, "red")
     ranks.allUnits.add(redBomb_2)
     ranks.redUnits.add(redBomb_2)
 
-    red2_0 = ranks.Rank2(3, 9, "red")
+    red2_0 = ranks.Rank2(8, 8, "red")
     ranks.allUnits.add(red2_0)
     ranks.redUnits.add(red2_0)
 
-    red2_1 = ranks.Rank2(3, 8, "red")
+    red2_1 = ranks.Rank2(8, 9, "red")
     ranks.allUnits.add(red2_1)
     ranks.redUnits.add(red2_1)
 
-    red2_2 = ranks.Rank2(3, 7, "red")
+    red2_2 = ranks.Rank2(3, 8, "red")
     ranks.allUnits.add(red2_2)
     ranks.redUnits.add(red2_2)
 
@@ -141,15 +141,15 @@ def setupUnits():
     ranks.allUnits.add(red3_0)
     ranks.redUnits.add(red3_0)
 
-    red3_1 = ranks.Rank3(4, 8, "red")
+    red3_1 = ranks.Rank3(7, 9, "red")
     ranks.allUnits.add(red3_1)
     ranks.redUnits.add(red3_1)
 
-    red4_0 = ranks.Rank4(5, 9, "red")
+    red4_0 = ranks.Rank4(3, 9, "red")
     ranks.allUnits.add(red4_0)
     ranks.redUnits.add(red4_0)
 
-    red4_1 = ranks.Rank4(5, 8, "red")
+    red4_1 = ranks.Rank4(5, 9, "red")
     ranks.allUnits.add(red4_1)
     ranks.redUnits.add(red4_1)
 
@@ -157,33 +157,34 @@ def setupUnits():
     ranks.allUnits.add(red5)
     ranks.redUnits.add(red5)
 
-    red6_0 = ranks.Rank6(7, 9, "red")
+    red6_0 = ranks.Rank6(1, 9, "red")
     ranks.allUnits.add(red6_0)
     ranks.redUnits.add(red6_0)
 
-    red6_1 = ranks.Rank6(7, 8, "red")
+    red6_1 = ranks.Rank6(6, 8, "red")
     ranks.allUnits.add(red6_1)
     ranks.redUnits.add(red6_1)
 
-    red7 = ranks.Rank7(8, 9, "red")
+    red7 = ranks.Rank7(2, 9, "red")
     ranks.allUnits.add(red7)
     ranks.redUnits.add(red7)
 
-    red8_0 = ranks.Rank8(9, 9, "red")
+    red8_0 = ranks.Rank8(2, 8, "red")
     ranks.allUnits.add(red8_0)
     ranks.redUnits.add(red8_0)
 
-    red8_1 = ranks.Rank8(9, 8, "red")
+    red8_1 = ranks.Rank8(9, 9, "red")
     ranks.allUnits.add(red8_1)
     ranks.redUnits.add(red8_1)
 
-    red9 = ranks.Rank9(0, 8, "red")
+    red9 = ranks.Rank9(4, 8, "red")
     ranks.allUnits.add(red9)
     ranks.redUnits.add(red9)
 
-    red10 = ranks.Rank10(1, 8, "red")
+    red10 = ranks.Rank10(7, 8, "red")
     ranks.allUnits.add(red10)
     ranks.redUnits.add(red10)
+
 
 def printRow():
     for row in ranks.grid:
