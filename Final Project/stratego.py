@@ -249,7 +249,7 @@ def gameloop():
 
                     if unit.selected == True:
                         unit.update()
-                        if player1 == True:
+                        if player1 == True and unit.moved == True:
                             player1 = False
                         else:
                             player1 = True

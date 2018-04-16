@@ -4,7 +4,6 @@ import pygame
 squareWidth = 50
 squareHeight = 50
 grid = []
-playerMoved = False
 
 #Create grid
 for row in range(10):
@@ -29,6 +28,7 @@ class Unit(pygame.sprite.Sprite):
         self.rect.x = (row * squareWidth) + 3 #intialize with grid coords - convert to x, y
         self.rect.y = (col * squareHeight) + 3
         self.selected = False
+        self.moved = False
 
     def getPos(self):
         mx, my = self.rect.x, self.rect.y
@@ -60,9 +60,11 @@ class Unit(pygame.sprite.Sprite):
                 grid[newCol][newRow] = 1
                 grid[col][row] = 0
                 self.selected = False
+                self.moved = True
             elif otherUnit.team == self.team:
                 print("Pick somewhere else, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 2 and newCol == 4:
                 print("Can't move there, man!")
@@ -104,6 +106,7 @@ class Unit(pygame.sprite.Sprite):
                 self.rect.y = (newCol * squareHeight) + 3
                 
                 self.selected = False
+                self.moved = True
                 return
             elif self.rank == 1 or self.rank == 0:
                 print("Can't move this unit, man!")
@@ -308,7 +311,10 @@ class RankBomb(Unit):
             self.image = pygame.image.load("Units/RedUnits/redRankBomb.jpg")
             self.baseImage = "Units/RedUnits/redRankBomb.jpg"
 
-
+    def update(self):
+        playedMoved = False
+        return
+    
 class RankSpy(Unit):
     
     def __init__(self, x, y, team):
@@ -338,3 +344,7 @@ class RankFlag(Unit):
         elif self.team == "red":
             self.image = pygame.image.load("Units/RedUnits/redRankFlag.jpg")
             self.baseImage = "Units/RedUnits/redRankFlag.jpg"
+
+    def update(self):
+        playerMoved = False
+        return
