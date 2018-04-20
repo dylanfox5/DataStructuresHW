@@ -1,9 +1,10 @@
 import pygame
 
 #Define grid size
-squareWidth = 50
-squareHeight = 50
+squareWidth = 75
+squareHeight = 75
 grid = []
+global didWin
 
 #Create grid
 for row in range(10):
@@ -54,14 +55,7 @@ class Unit(pygame.sprite.Sprite):
 
 
 
-            if otherUnit == None:
-                self.rect.x = (newRow * squareWidth) + 3
-                self.rect.y = (newCol * squareHeight) + 3
-                grid[newCol][newRow] = 1
-                grid[col][row] = 0
-                self.selected = False
-                self.moved = True
-            elif otherUnit.team == self.team:
+            if otherUnit != None and otherUnit.team == self.team:
                 print("Pick somewhere else, man!")
                 self.selected = False
                 self.moved = False
@@ -69,34 +63,42 @@ class Unit(pygame.sprite.Sprite):
             elif newRow == 2 and newCol == 4:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 2 and newCol == 5:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 3 and newCol == 4:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 3 and newCol == 5:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 6 and newCol == 4:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 6 and newCol == 5:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 7 and newCol == 4:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif newRow == 7 and newCol == 5:
                 print("Can't move there, man!")
                 self.selected = False
+                self.moved = False
                 return
             elif grid[newCol][newRow] == 1 and otherUnit.team != self.team:
                 print("Attack!")
@@ -108,14 +110,25 @@ class Unit(pygame.sprite.Sprite):
                 self.selected = False
                 self.moved = True
                 return
-            elif self.rank == 1 or self.rank == 0:
+            elif self.rank == 0:
                 print("Can't move this unit, man!")
                 self.selected = False
                 return
             elif self.team == "blue" and (newRow - row > 1 or newCol - col > 1) and self.rank != 2:
                 print("Can only move one space!")
+                self.selected = False
+                self.moved = False
             elif self.team == "red" and (row - newRow > 1 or col - newCol > 1) and self.rank != 2:
                 print("Can only move one space!")
+                self.selected = False
+                self.moved = False
+            elif otherUnit == None:
+                self.rect.x = (newRow * squareWidth) + 3
+                self.rect.y = (newCol * squareHeight) + 3
+                grid[newCol][newRow] = 1
+                grid[col][row] = 0
+                self.selected = False
+                self.moved = True
         else:
             return 
 
@@ -125,7 +138,7 @@ class Unit(pygame.sprite.Sprite):
         y = self.rect.y
         self.selected = True
         
-        if x <= mx <= x + 40 and y <= my < y + 40:
+        if x <= mx <= x + 65 and y <= my < y + 65:
             self.selected == True
         else:
             self.selected = False
@@ -138,7 +151,15 @@ class Unit(pygame.sprite.Sprite):
                 if unit.team == self.team:
                     return
                 else:
-                    if unit.rank > self.rank:
+                    if unit.rank == 0:
+                        didWin = True
+                    elif unit.rank == 11 and self.rank == 3:
+                        allUnits.remove(unit)
+                        
+                        grid[newCol][newRow] = 1
+                        grid[cCol][cRow] = 0
+                        
+                    elif unit.rank > self.rank:
                         allUnits.remove(self)
                         
                         grid[newCol][newRow] = 1

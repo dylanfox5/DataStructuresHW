@@ -5,7 +5,7 @@ pygame.init()
 
 
 #Define screen size
-(width, height) = (500, 500)
+(width, height) = (750, 750)
 myFont = pygame.font.SysFont("Times New Roman", 100)
 startLabel = myFont.render("Start", 1, (255, 255, 255))
 
@@ -221,8 +221,9 @@ def intro():
     
 def gameloop():
     player1 = True #blue team is player1
-    running = True
-    while running:
+    didWin = False
+    
+    while didWin == False:
         for unit in ranks.allUnits:
             if player1 == True:
                     if unit.team == "red":
@@ -248,10 +249,11 @@ def gameloop():
                 elif event.type == pygame.MOUSEBUTTONDOWN:
 
                     if unit.selected == True:
+                        print(unit.getPos())
                         unit.update()
                         if player1 == True and unit.moved == True:
                             player1 = False
-                        else:
+                        elif player1 == False and unit.moved == True:
                             player1 = True
                         printRow()
                     else:
