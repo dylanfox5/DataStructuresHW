@@ -6,17 +6,36 @@ pygame.init()
 
 #Define screen size
 (width, height) = (750, 750)
-myFont = pygame.font.SysFont("Times New Roman", 100)
-startLabel = myFont.render("Start", 1, (255, 255, 255))
+myFont = pygame.font.SysFont("Algerian", 50)
+myFont1 = pygame.font.SysFont("Algerian", 30)
+myFont2 = pygame.font.SysFont("Times New Roman", 20)
+startLabel = myFont.render("Start", 1, (255, 215, 0))
+howToLabel = myFont1.render("How To Play", 1, (255, 215, 0))
+backLabel = myFont1.render("Back to Start", 1, (255, 215, 0))
+rulesText = myFont2.render("Stratego is a game in which you need to capture the flag of your", 1, (255, 215, 0))
+rulesText2 = myFont2.render("opponent while defending your own flag. To capture the flag you", 1, (255, 215, 0))
+rulesText3 = myFont2.render("use your army of 20 pieces. Pieces have a rank and represent", 1, (255, 215, 0))
+rulesText4 = myFont2.render("individual officers and soldiers in an army. In addition to those", 1, (255, 215, 0))
+rulesText5 = myFont2.render("ranked pieces you can use bombs to protect your flag.", 1, (255, 215, 0))
+rulesText6 = myFont2.render("You can capture the other flag by attacking the other team's", 1, (255, 215, 0))
+rulesText7 = myFont2.render("units. When attacking, the unit with the higher rank wins. But,", 1, (255, 215, 0))
+rulesText8 = myFont2.render("there are exceptions to the rule. The spy, which has a rank of 1,", 1, (255, 215, 0))
+rulesText9 = myFont2.render(" can beat the rank of 10. The miners, which have a rank of 3, can", 1, (255, 215, 0))
+rulesText10 = myFont2.render("disarm a bomb. Also, each unit can only move 1 space. But, the", 1, (255, 215, 0))
+rulesText11 = myFont2.render("scout, which has a rank of 2, can move any number of spaces.", 1, (255, 215, 0))
+pygame.mixer.music.load("Sounds/introMusic.mp3")
 
 #Load images/colors onto screen
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Stratego")
 board = pygame.image.load("Images/strategoBoard.jpg")
-logo = pygame.image.load("Images/strategoLogo.png")
+logo = pygame.image.load("Images/newStrategoLogo.png")
 blueCover = pygame.image.load("Images/blueCover.png")
 redCover = pygame.image.load("Images/redCover.png")
+strategoHowTo = pygame.image.load("Images/strategoHowTo.jpg")
 introScreen = pygame.display.set_mode((width, height))
+howToScreen = pygame.display.set_mode((width, height))
+winScreen = pygame.display.set_mode((width, height))
 screen.convert()
 
 def setupUnits():
@@ -199,31 +218,82 @@ for unit in ranks.allUnits:
     ranks.grid[col][row] += 1
 printRow()
 
+#buttons for start menu
+#startButton = pygame.draw.rect(introScreen, (250, 250, 250), (width/2 - 100, height/2 - 105, 200, 50))
+#howToButton = pygame.draw.rect(introScreen, (250, 250, 250), (width/2 - 100, height/2 - 45, 200, 50))
+
+
 def intro():
     pygame.init()
-    gameloop = True
-
+    intro = True
     
-    introScreen.fill((0, 0, 128))
-    introScreen.blit(logo, (0,0))
-    introScreen.blit(startLabel, (150, 150))
-    pygame.display.flip()
-    
-    while gameloop:
+    while intro:
+        
+        introScreen.fill((0, 0, 128))
+        introScreen.blit(logo, (0,559))
+        startButton = pygame.draw.rect(introScreen, (128, 0, 0), (width/2 - 100, height/2 - 105, 200, 50))
+        howToButton = pygame.draw.rect(introScreen, (128, 0, 0), (width/2 - 100, height/2 - 45, 200, 50))
+        introScreen.blit(startLabel, (width/2 - 80, height/2 - 105))
+        introScreen.blit(howToLabel, (width/2 - 95, height/2 - 35))
+        pygame.display.flip()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                gameloop = False
                 pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                pygame.display.flip()
+                pos = pygame.mouse.get_pos()
+                if startButton.collidepoint(pos):
+                    print("start")
+                    gameloop()
+                elif howToButton.collidepoint(pos):
+                    howToPlay()
+                    print("How To play")
+
+def howToPlay():
+    pygame.init()
+    howTo = True
+
+    while howTo:
+        
+        howToScreen.fill((128, 0, 0))
+        backButton = pygame.draw.rect(howToScreen, (0, 0, 128), (25, 25, 250, 50))
+        howToScreen.blit(backLabel, (35, 35))
+        howToScreen.blit(rulesText, (35, 100))
+        howToScreen.blit(rulesText2, (35, 125))
+        howToScreen.blit(rulesText3, (35, 150))
+        howToScreen.blit(rulesText4, (35, 175))
+        howToScreen.blit(rulesText5, (35, 200))
+        howToScreen.blit(rulesText6, (35, 250))
+        howToScreen.blit(rulesText7, (35, 275))
+        howToScreen.blit(rulesText8, (35, 300))
+        howToScreen.blit(rulesText9, (35, 325))
+        howToScreen.blit(rulesText10, (35, 350))
+        howToScreen.blit(rulesText11, (35, 375))
+        howToScreen.blit(strategoHowTo, (width/2 - 250, 425))
+        pygame.display.flip()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
                 return
-    
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                if backButton.collidepoint(pos):
+                    print("Back to Main Menu")
+                    intro()
+
+        
+
+
 def gameloop():
     player1 = True #blue team is player1
-    didWin = False
+    pygame.mixer.music.fadeout(5)
     
-    while didWin == False:
+    while True:
+        if ranks.didWin == True:
+            win()
+
+        
         for unit in ranks.allUnits:
             if player1 == True:
                     if unit.team == "red":
@@ -244,7 +314,6 @@ def gameloop():
             for unit in ranks.allUnits:
 
                 if event.type == pygame.QUIT:
-                    running = False
                     pygame.quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -260,8 +329,6 @@ def gameloop():
                         unit.selectUnit()
                     print(unit.selected)
 
-
-
-
+pygame.mixer.music.play(1)
 intro()
-gameloop()
+

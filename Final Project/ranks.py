@@ -1,10 +1,15 @@
 import pygame
 
+
 #Define grid size
 squareWidth = 75
 squareHeight = 75
 grid = []
-global didWin
+didWin = False
+pygame.init()
+
+#Sound Effects
+bomb = pygame.mixer.Sound("Sounds/bombWav.wav")
 
 #Create grid
 for row in range(10):
@@ -152,7 +157,8 @@ class Unit(pygame.sprite.Sprite):
                     return
                 else:
                     if unit.rank == 0:
-                        didWin = True
+                        pygame.quit()
+                        return
                     elif unit.rank == 11 and self.rank == 3:
                         allUnits.remove(unit)
                         
@@ -164,12 +170,14 @@ class Unit(pygame.sprite.Sprite):
                         
                         grid[newCol][newRow] = 1
                         grid[cCol][cRow] = 0
+                        bomb.play()
                             
                     elif unit.rank < self.rank:
                         allUnits.remove(unit)
                         
                         grid[newCol][newRow] = 1
                         grid[cCol][cRow] = 0
+                        bomb.play()
 
 
                     elif unit.rank == self.rank:
@@ -178,6 +186,7 @@ class Unit(pygame.sprite.Sprite):
                         
                         grid[newCol][newRow] = 0
                         grid[cCol][cRow] = 0
+                        bomb.play()
                         
 
 #Sub Classes
